@@ -23,19 +23,21 @@ trait TSnuffRepositoryDynamic
      */
     public function createSnuffDynamicRepositories(array $repositoriesConfigs)
     {
-        $extensions = new ExtensionRepository();
-        $repositories = new RepositoryDescriptionRepository();
+        $this->registerSnuffRepos([
+            'extensionRepository' => ExtensionRepository::class,
+            'repositories' => RepositoryDescriptionRepository::class
+        ]);
 
         foreach ($repositoriesConfigs as $repository) {
             list($name, $pk, $class) = $repository;
-            $extensions->create(new Extension([
+            $this->createWithSnuffRepo('extensionRepository', new Extension([
                 Extension::FIELD__CLASS => ExtensionRepositoryDescription::class,
                 Extension::FIELD__INTERFACE => IExtensionRepositoryDescription::class,
                 Extension::FIELD__SUBJECT => '*',
                 Extension::FIELD__METHODS => [$name]
             ]));
 
-            $repositories->create(new RepositoryDescription([
+            $this->createWithSnuffRepo('repositories', new RepositoryDescription([
                 RepositoryDescription::FIELD__NAME => $name,
                 RepositoryDescription::FIELD__SCOPE => 'extas',
                 RepositoryDescription::FIELD__PRIMARY_KEY => $pk,
@@ -43,11 +45,6 @@ trait TSnuffRepositoryDynamic
                 RepositoryDescription::FIELD__ALIASES => [$name]
             ]));
         }
-
-        $this->registerSnuffRepos([
-            'extensionRepository' => ExtensionRepository::class,
-            'repositories' => RepositoryDescriptionRepository::class
-        ]);
     }
 
     /**
