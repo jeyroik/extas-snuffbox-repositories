@@ -1,0 +1,12 @@
+{
+  "name": "jeyroik/extas-snuffbox-repositories",
+  "description": "Extas snuffbox",
+  "require": {
+    "jeyroik/extas-snuffbox": "0.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "extas\\": "src/"
+    }
+  }
+}
