@@ -28,6 +28,15 @@ trait TSnuffRepositoryDynamic
             'repositories' => RepositoryDescriptionRepository::class
         ]);
 
+        $this->addSnuffDynamicRepositories($repositoriesConfigs);
+    }
+
+    /**
+     * @param array $repositoriesConfigs
+     * @throws \Exception
+     */
+    public function addSnuffDynamicRepositories(array $repositoriesConfigs)
+    {
         foreach ($repositoriesConfigs as $repository) {
             list($name, $pk, $class) = $repository;
             $this->createWithSnuffRepo('extensionRepository', new Extension([
