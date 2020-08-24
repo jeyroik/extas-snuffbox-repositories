@@ -4,6 +4,7 @@ namespace extas\components\repositories;
 use extas\components\extensions\Extension;
 use extas\components\extensions\ExtensionRepository;
 use extas\components\extensions\ExtensionRepositoryDescription;
+use extas\components\plugins\PluginRepository;
 use extas\interfaces\extensions\IExtensionRepositoryDescription;
 use extas\interfaces\repositories\IRepositoryDescription;
 
@@ -25,6 +26,7 @@ trait TSnuffRepositoryDynamic
     {
         $this->registerSnuffRepos([
             'extensionRepository' => ExtensionRepository::class,
+            'pluginRepository' => PluginRepository::class,
             'repositories' => RepositoryDescriptionRepository::class
         ]);
 
